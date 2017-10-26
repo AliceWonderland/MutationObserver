@@ -33,7 +33,7 @@ function change(){
 }
 
 function callback(){
-  console.log('Callback called.');
+  console.log('Callback Called.');
 }
 
 oReq.open("GET", "https://jsonplaceholder.typicode.com/photos");
@@ -41,27 +41,27 @@ oReq.open("GET", "https://jsonplaceholder.typicode.com/photos");
 
 // IE11+
 function observer(){
-  //watch a node for changes
+  //choose a target node
   var target = document.getElementById('main').getElementsByTagName('p').item(0);
-  console.log('my target',target);
+  console.log('My Target',target);
 
   // create an observer instance
   var observer = new MutationObserver(function(mutations) {
-    mutations.forEach(function(mutation) {
-      console.log(mutation.type, mutation.target, mutation.attributeName, mutation.attributeNamespace);
+    let isComplete = mutations.every(function(mutation) {
+        console.log('Mutation', mutation.type, mutation.target, mutation.attributeName, mutation.attributeNamespace);
 
-      // check for str 'load'
-      let str=mutation.target.innerHTML.toLowerCase().match('load');
+        // check for str 'load'
+        let str=mutation.target.innerHTML.toLowerCase().match('load');
+        return !str;
 
-      if(!str){
-        // call callback() here
-        callback();
+        // or check for img src 'load' or any number of gif names
+        // ...
+
       }
-
-      // or check for img src 'load' or any number of gif names
-      // ...
-
-    });
+    );
+    if(isComplete){
+      callback();
+    }
   });
 
   // configuration of the observer:
