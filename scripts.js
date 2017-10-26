@@ -47,11 +47,11 @@ function observer(){
 
   // create an observer instance
   var observer = new MutationObserver(function(mutations) {
-    let isComplete = mutations.every(function(mutation) {
+    var isComplete = mutations.every(function(mutation) {
         console.log('Mutation', mutation.type, mutation.target, mutation.attributeName, mutation.attributeNamespace);
 
         // check for str 'load'
-        let str=mutation.target.innerHTML.toLowerCase().match('load');
+        var str=mutation.target.innerHTML.toLowerCase().match('load');
         return !str;
 
         // or check for img src 'load' or any number of gif names
